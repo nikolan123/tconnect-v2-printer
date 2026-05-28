@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "display_name": "TConnect Printer App",
+    "description": "Small app for printing on the Takeaway T-Connect Terminal V2.",
+    "supported_platforms": {
+      "android": "Android 6"
+    }
+  },
+  "job": {
+    "key": "android-release",
+    "platform": "android",
+    "arch": "universal",
+    "artifacts_glob": [
+      "build/*.apk"
+    ]
+  }
+}

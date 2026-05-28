@@ -1,0 +1,35 @@
+when:
+  - event: push
+    branch:
+      - main
+      - master
+  - event: manual
+
+labels:
+  backend: docker
+  platform: linux/amd64
+
+steps:
+  build-android:
+    image: eclipse-temurin:17-jdk
+    commands:
+      - date +%s > .tekljer_action_started_at
+      - apt-get update && apt-get install -y wget
+      - wget -q https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool -O /usr/local/bin/apktool
+      - wget -q https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.3.jar -O /usr/local/bin/apktool.jar
+      - chmod +x /usr/local/bin/apktool
+      - chmod +x build.sh
+      - ./build.sh
+
+  post-to-tekljer:
+    image: alpine
+    depends_on:
+      - build-android
+    environment:
+      UPLOAD_TOKEN:
+        from_secret: upload_token
+      TEKLJER_SERVER: http://192.168.1.20:7777
+      TEKLJER_JOB: android-release
+    commands:
+      - apk add --no-cache curl jq
+      - curl -fsSL "$TEKLJER_SERVER/ci/v1/upload.sh" | sh
