@@ -15,7 +15,7 @@ steps:
     commands:
       - date +%s > .tekljer_action_started_at
       - wget -q https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool -O /usr/local/bin/apktool
-      - wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -O /usr/local/bin/apktool.jar
+      - wget -q https://github.com/iBotPeaches/Apktool/releases/download/v3.0.2/apktool_3.0.2.jar -O /usr/local/bin/apktool.jar
       - chmod +x /usr/local/bin/apktool
       - chmod +x build.sh
       - ./build.sh

@@ -39,7 +39,7 @@ java -cp tools/r8.jar com.android.tools.r8.D8 \
 cp AndroidManifest.xml apk/AndroidManifest.xml
 cp apktool.yml apk/apktool.yml
 
-apktool b --use-aapt1 apk -o "build/${APP_NAME}-unsigned.apk"
+apktool b apk -o "build/${APP_NAME}-unsigned.apk"
 cp "build/${APP_NAME}-unsigned.apk" "build/${APP_NAME}.apk"
 
 jarsigner \
